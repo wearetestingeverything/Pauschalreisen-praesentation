@@ -1,1 +1,527 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Pauschalreisen - Präsentation DERM</title>
+<style>
+  :root {
+    --bg-primary: #0f172a;
+    --bg-card: #1e293b;
+    --accent-teal: #14b8a6;
+    --accent-orange: #f97316;
+    --accent-blue: #38bdf8;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+  }
 
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  header {
+    text-align: center;
+    max-width: 900px;
+    margin-bottom: 1rem;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+  }
+
+  header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+  }
+
+  .slide {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 960px;
+    min-height: 540px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .slide-header h2 {
+    font-size: 1.8rem;
+    color: var(--accent-teal);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .slide-badge {
+    background: rgba(20, 184, 166, 0.1);
+    color: var(--accent-teal);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(20, 184, 166, 0.3);
+  }
+
+  .slide-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .quote-box {
+    background: rgba(56, 189, 248, 0.05);
+    border-left: 4px solid var(--accent-blue);
+    padding: 1.25rem;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #e2e8f0;
+    font-size: 1.15rem;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .grid-2-1 {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+
+  .card h3 {
+    color: var(--accent-blue);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .card.orange h3 {
+    color: var(--accent-orange);
+  }
+
+  .card p, .card ul {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .card ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .card ul li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .card ul li::before {
+    content: "•";
+    color: var(--accent-teal);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+  }
+
+  .pro-con {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .pro-card {
+    background: rgba(20, 184, 166, 0.05);
+    border: 1px solid rgba(20, 184, 166, 0.2);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  .con-card {
+    background: rgba(249, 115, 22, 0.05);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  .pro-card h3 { color: var(--accent-teal); }
+  .con-card h3 { color: var(--accent-orange); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  th {
+    background-color: rgba(15, 23, 42, 0.8);
+    color: var(--accent-teal);
+  }
+
+  td {
+    color: var(--text-muted);
+  }
+
+  .slide-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .highlight {
+    color: var(--accent-teal);
+    font-weight: 600;
+  }
+
+  .badge-tag {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--accent-blue);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-right: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Pauschalreisen (S. 22–26)</h1>
+  <p>Fertiges Folien-Set für deine DERM-Präsentation</p>
+</header>
+
+<!-- SLIDE 1 -->
+<div class="slide">
+  <div class="slide-header">
+    <h2><span>🚀</span> Die Pauschalreise</h2>
+    <span class="slide-badge">Folie 1 / 7</span>
+  </div>
+  <div class="slide-content">
+    <div style="text-align: center; padding: 2rem 0;">
+      <h3 style="font-size: 2.2rem; color: var(--text-main); margin-bottom: 1rem;">
+        Vom Massenprodukt zur flexiblen Modulreise[span_0](start_span)[span_0](end_span)[span_1](start_span)[span_1](end_span)
+      </h3>
+      <p style="color: var(--accent-blue); font-size: 1.2rem; margin-bottom: 2rem;">
+        Destinations-, Event- und Reisemanagement (DERM) – 4. Jahrgang[span_2](start_span)[span_2](end_span)
+      </p>
+    </div>
+    <div class="quote-box">
+      <strong>Einstieg für den Vortrag:</strong><br>
+      „Warum ermöglicht erst ein Bündel aus Flug und Hotel Millionen Menschen das Reisen – und wie gestaltet man aus vorgefertigten Bausteinen heute einen maßgeschneiderten Traumurlaub?[span_3](start_span)[span_4](start_span)“[span_3](end_span)[span_4](end_span)
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>DERM Skriptum | S. 22–26</span>[span_5](start_span)[span_5](end_span)[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_span)[span_8](start_span)[span_8](end_span)[span_9](start_span)[span_9](end_span)
+    <span>Thema: Pauschalreisen</span>[span_10](start_span)[span_10](end_span)
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide">
+  <div class="slide-header">
+    <h2><span>📦</span> Was ist eine Pauschalreise?</h2>
+    <span class="slide-badge">Folie 2 / 7</span>
+  </div>
+  <div class="slide-content">
+    <div class="grid-2">
+      <div class="card">
+        <h3>Definition & Erstellung</h3>
+        <ul>
+          <li><strong>Marktgängige Leistungspakete:</strong> Erstellt von Reiseveranstaltern, vertrieben über Reisemittler (Reisebüros)[span_11](start_span)[span_11](end_span).</li>
+          <li><strong>Bündelung:</strong> Kombination von mindestens 2 Reise-Teilleistungen zu einem neuen Gesamtprodukt[span_12](start_span)[span_12](end_span)[span_13](start_span)[span_13](end_span).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Der Preisvorteil</h3>
+        <ul>
+          <li><strong>Viel günstiger als Einzelbuchung:</strong> Verkaufen sich deutlich unter der Summe der Einzelpreise[span_14](start_span)[span_14](end_span).</li>
+          <li><strong>Mengenrabatte:</strong> Der Veranstalter sichert sich Rabatte bei Hotels/Airlines und gibt diese an Kunden weiter[span_15](start_span)[span_15](end_span).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card orange" style="margin-top: 0.5rem;">
+      <h3>💡 Kernmerkmale auf einen Blick</h3>
+      <p>Einheitlicher Gesamtpreis • Vertraglich abgesichert • Bündelung von Transfer & Beherbergung • Günstiger als Individualbuchung[span_16](start_span)[span_16](end_span)[span_17](start_span)[span_17](end_span)</p>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>DERM Skriptum | S. 22</span>[span_18](start_span)[span_18](end_span)
+    <span>Grundlagen & Begriff</span>[span_19](start_span)[span_19](end_span)
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide">
+  <div class="slide-header">
+    <h2><span>🌍</span> Entstehung & Konsequenzen</h2>
+    <span class="slide-badge">Folie 3 / 7</span>
+  </div>
+  <div class="slide-content">
+    <div class="card" style="margin-bottom: 0.5rem;">
+      <h3>Wie kam es zur Entwicklung?</h3>
+      <p>Durch preisgünstige Package-Angebote wurden Urlaubsreisen überhaupt erst für breite Bevölkerungsschichten leistbar – man spricht von der <strong class="highlight">„Demokratisierung des Reisens“</strong>[span_20](start_span)[span_20](end_span).</p>
+    </div>
+    <div class="pro-con">
+      <div class="pro-card">
+        <h3>🟢 Positive Konsequenzen</h3>
+        <ul>
+          <li><strong>Demokratisierung:</strong> Reisen ist kein Luxusgut für Wenige mehr[span_21](start_span)[span_21](end_span).</li>
+          <li><strong>Günstige Konditionen:</strong> Hohe Ersparnis durch Mengenrabatte[span_22](start_span)[span_22](end_span).</li>
+          <li><strong>Sicherheit & Struktur:</strong> Vorgefertigte, verlässliche Massen-Produkte[span_23](start_span)[span_23](end_span).</li>
+        </ul>
+      </div>
+      <div class="con-card">
+        <h3>🔴 Negative Konsequenzen</h3>
+        <ul>
+          <li><strong>Overtourism:</strong> Überlastung populärer Zielregionen[span_24](start_span)[span_24](end_span).</li>
+          <li><strong>Umweltbelastung:</strong> Zerstörung natürlicher Lebensräume[span_25](start_span)[span_25](end_span).</li>
+          <li><strong>Kulturverlust:</strong> Verlust der ursprünglichen Authentizität[span_26](start_span)[span_26](end_span).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>DERM Skriptum | S. 22</span>[span_27](start_span)[span_27](end_span)
+    <span>Folgen der Masse</span>[span_28](start_span)[span_28](end_span)
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide">
+  <div class="slide-header">
+    <h2><span>🏷️</span> Kategorisierung & Formen</h2>
+    <span class="slide-badge">Folie 4 / 7</span>
+  </div>
+  <div class="slide-content">
+    <div class="grid-2">
+      <div class="card">
+        <h3>✈️ Nach Verkehrsmittel</h3>
+        <p>
+          <span class="badge-tag">Flug</span> Charter, Inclusive Tours (IT), Kreuzflüge[span_29](start_span)[span_29](end_span)<br>
+          <span class="badge-tag">Bus</span> Rundreisen, Kaffeefahrten, Events[span_30](start_span)[span_30](end_span)<br>
+          <span class="badge-tag">Bahn</span> Sonderzüge, Regelzüge[span_31](start_span)[span_31](end_span)<br>
+          <span class="badge-tag">Schiff</span> Kreuzfahrten, River Cruises[span_32](start_span)[span_32](end_span)<br>
+          <span class="badge-tag">PKW</span> Selbstfahrer, Konvoi-Arrangements[span_33](start_span)[span_33](end_span)
+        </p>
+      </div>
+      <div class="card">
+        <h3>🎯 Nach Reisemotiven</h3>
+        <p>
+          <span class="badge-tag">Erholung</span> Badeurlaub, Kur, Wellness[span_34](start_span)[span_34](end_span)<br>
+          <span class="badge-tag">Kultur</span> Bildungs-, Studien-, Pilgerreisen[span_35](start_span)[span_35](end_span)<br>
+          <span class="badge-tag">Aktiv</span> Sport-, Golf-, Wandertourismus[span_36](start_span)[span_36](end_span)<br>
+          <span class="badge-tag">Erlebnis</span> Cluburlaub, Öko-Reisen[span_37](start_span)[span_37](end_span)
+        </p>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top: 0.5rem;">
+      <div class="card">
+        <h3>📍 Nach Destination</h3>
+        <p>Fernreisen • Städtereisen • Inlands- vs. Auslandsreisen • Bestimmte Zielgebiete[span_38](start_span)[span_38](end_span)</p>
+      </div>
+      <div class="card">
+        <h3>👥 Nach Soziologie / Zielgruppe</h3>
+        <p>Familien • Senioren • Singles • Jugendliche • MICE (Kongress/Incentive)[span_39](start_span)[span_39](end_span)</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>DERM Skriptum | S. 23–25</span>[span_40](start_span)[span_40](end_span)[span_41](start_span)[span_41](end_span)[span_42](start_span)[span_42](end_span)
+    <span>Klassifikation von Pauschalreisen</span>[span_43](start_span)[span_43](end_span)[span_44](start_span)[span_44](end_span)
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide">
+  <div class="slide-header">
+    <h2><span>🧩</span> Die 3 Leistungssäulen</h2>
+    <span class="slide-badge">Folie 5 / 7</span>
+  </div>
+  <div class="slide-content">
+    <div class="grid-3">
+      <div class="card">
+        <h3>1. Reiseleistungen</h3>
+        <p><strong>Materielle Bausteine:</strong></p>
+        <ul>
+          <li>Transport & Transfer[span_45](start_span)[span_45](end_span)</li>
+          <li>Unterbringung & Verpflegung[span_46](start_span)[span_46](end_span)</li>
+          <li>Mietwagen, Reiseleitung[span_47](start_span)[span_47](end_span)</li>
+          <li>Tickets, Fremdenführer[span_48](start_span)[span_48](end_span)</li>
+          <li>Reiseversicherung[span_49](start_span)[span_49](end_span)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>2. Immateriell</h3>
+        <p><strong>Zielgebietsfaktoren:</strong></p>
+        <ul>
+          <li>Landschaft & Klima[span_50](start_span)[span_50](end_span)</li>
+          <li>Flora & Fauna[span_51](start_span)[span_51](end_span)</li>
+          <li>Kultur & Gastfreundschaft[span_52](start_span)[span_52](end_span)</li>
+          <li>Mentalität der Bereisten[span_53](start_span)[span_53](end_span)</li>
+        </ul>
+      </div>
+      <div class="card orange">
+        <h3>3. Eigenleistung RV</h3>
+        <p><strong>Mehrwert des Veranstalters:</strong></p>
+        <ul>
+          <li>Sorgfältige Auswahl[span_54](start_span)[span_54](end_span)</li>
+          <li>Sinnvolle Kombination[span_55](start_span)[span_55](end_span)</li>
+          <li>Professionelle Betreuung[span_56](start_span)[span_56](end_span)</li>
+          <li>Risikoübernahme[span_57](start_span)[span_57](end_span)[span_58](start_span)[span_58](end_span)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>DERM Skriptum | S. 25</span>[span_59](start_span)[span_59](end_span)
+    <span>Pakete mit Mehrwert</span>[span_60](start_span)[span_60](end_span)
+  </div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide">
+  <div class="slide-header">
+    <h2><span>⚖️</span> Kundenauftrag: MIT vs. OHNE</h2>
+    <span class="slide-badge">Folie 6 / 7</span>
+  </div>
+  <div class="slide-content">
+    <table>
+      <thead>
+        <tr>
+          <th>Kriterium</th>
+          <th>MIT Kundenauftrag (Auftragsreise)[span_61](start_span)[span_61](end_span)</th>
+          <th>OHNE Kundenauftrag (Programmreise)[span_62](start_span)[span_62](end_span)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Zielgruppe</strong></td>
+          <td>Konkreter Auftraggeber (z.B. Firma, Verein, Schule)[span_63](start_span)[span_63](end_span)</td>
+          <td>Anonyme, vorab unbekannte Abnehmer[span_64](start_span)[span_64](end_span)</td>
+        </tr>
+        <tr>
+          <td><strong>Absatzrisiko</strong></td>
+          <td><span style="color: var(--accent-teal);">KEIN Absatzrisiko</span> für den Veranstalter[span_65](start_span)[span_65](end_span)</td>
+          <td><span style="color: var(--accent-orange);">VOLLES Auslastungsrisiko</span> (Kontingente)[span_66](start_span)[span_66](end_span)</td>
+        </tr>
+        <tr>
+          <td><strong>Erstellung</strong></td>
+          <td>Maßgeschneidert auf individuelle Wünsche[span_67](start_span)[span_67](end_span)</td>
+          <td>Schablonenhaft vorgefertigt (Katalog/Online)[span_68](start_span)[span_68](end_span)</td>
+        </tr>
+        <tr>
+          <td><strong>Beispiele</strong></td>
+          <td>Incentive-Reisen, Betriebsausflüge, Kongresse[span_69](start_span)[span_69](end_span)</td>
+          <td>Klassische Katalog-Pauschalreise[span_70](start_span)[span_70](end_span)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="slide-footer">
+    <span>DERM Skriptum | S. 26</span>[span_71](start_span)[span_71](end_span)
+    <span>Formen der Reiseveranstaltung</span>[span_72](start_span)[span_72](end_span)
+  </div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide">
+  <div class="slide-header">
+    <h2><span>⚙️</span> Modulsysteme & Flexibilität</h2>
+    <span class="slide-badge">Folie 7 / 7</span>
+  </div>
+  <div class="slide-content">
+    <div class="card" style="margin-bottom: 1rem;">
+      <h3>Das Prinzip: Baukastensystem</h3>
+      <p>Um Kunden günstige Preise zu bieten, ihnen aber zeitgleich maximale Freiheit zu lassen, bieten Veranstalter Reise-Elemente zum <strong>Selbst-Kombinieren</strong> an[span_73](start_span)[span_73](end_span).</p>
+    </div>
+    <div class="grid-2">
+      <div class="card orange">
+        <h3>Kombinations-Beispiele (Skript S. 26)</h3>
+        <ul>
+          <li>1 Woche Rundreise + 1 Woche Badeaufenthalt[span_74](start_span)[span_74](end_span)</li>
+          <li>1 Woche Tauchsport + 1 Woche Kreuzfahrt[span_75](start_span)[span_75](end_span)</li>
+          <li>Kreuzfahrt kombiniert mit Cluburlaub[span_76](start_span)[span_76](end_span)</li>
+          <li>Bausteine für Ausflüge & Mietauto flexibel ergänzen[span_77](start_span)[span_77](end_span)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Der Win-Win-Effekt</h3>
+        <ul>
+          <li><strong>Für Kunden:</strong> Individueller Urlaub ohne den vollen Aufwand der Eigenplanung[span_78](start_span)[span_78](end_span)[span_79](start_span)[span_79](end_span).</li>
+          <li><strong>Für Veranstalter:</strong> Höhere Kundenzufriedenheit & breitere Zielgruppenansprache[span_80](start_span)[span_80](end_span)[span_81](start_span)[span_81](end_span).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>DERM Skriptum | S. 26</span>[span_82](start_span)[span_82](end_span)
+    <span>Modul-Systeme</span>[span_83](start_span)[span_83](end_span)
+  </div>
+</div>
+
+</body>
+</html>
